@@ -1,1 +1,23 @@
-This repository is used for Homework 1.
+$ python3 generatedata.py 1000 600 50 "ref_1.txt" "reads_1.txt"
+reference length: 1000
+number reads: 600
+read length: 50
+aligns 0: 0.15333333333333332
+aligns 1: 0.7733333333333333
+aligns 2: 0.07333333333333333
+
+$ python3 generatedata.py 10000 6000 50 "ref_2.txt" "reads_2.txt"
+reference length: 10000
+number reads: 6000
+read length: 50
+aligns 0: 0.15033333333333335
+aligns 1: 0.746
+aligns 2: 0.10366666666666667
+
+$ python3 generatedata.py 100000 60000 50 "ref_3.txt" "reads_3.txt"
+reference length: 100000
+number reads: 60000
+read length: 50
+aligns 0: 0.15028333333333332
+aligns 1: 0.74855
+aligns 2: 0.10116666666666667
