@@ -45,7 +45,7 @@ def create_reference(length):
 def create_read_once(reference, read_length):
     length = len(reference)
     start_pos = random.randint(0,length/2-1)
-    return reference[start_pos+read_length] + "{}".format(start_pos)
+    return reference[start_pos:start_pos+read_length] + " {}".format(start_pos)
 
 #function to create a read that will appear twice
 #the output is the read and its 2 positions
@@ -68,17 +68,23 @@ def create_random_read(read_length):
 
 #function to create a read that is not in the reference
 
-def create_read_never(reference, read_length):
+def create_read_never(reference,read_length):
     read = create_random_read(read_length)
     while reference.find(read) != -1:
-        read = create.random_read(read_length)
+        read = create_random_read(read_length)
     return read + " -1"
+
+#we create the variables that store the number of reads of each type
+
+number_read_once = 0
+number_read_twice = 0
+number_read_never = 0
 
 #function that chooses the type of read we want
 #this function increments the total number of reads per type
 
 def create_read(reference,read_length):
-    random_number=random.random()
+    random_number = random.random()
     if random_number < 0.75:
         global number_read_once
         number_read_once += 1
@@ -88,22 +94,23 @@ def create_read(reference,read_length):
         number_read_twice += 1
         return create_read_twice(reference,read_length)
     global number_read_never
-    number_read_never+=1
+    number_read_never += 1
     return create_read_never(reference,read_length)
 
-number_read_once = 0
-number_read_twice = 0
-number_read_never = 0
+#we create the reference
 
 reference0 = create_reference(reference_length)
 
+#we create the 3 files
 ref_file = open(reference_file,"w")
 reads_file = open(reads_file,"w")
 align_file = open("alignments.txt","w")
 
+#we write the reference in the appropriate file
 ref_file.write(reference0 + "\n")
 ref_file.close()
 
+#we fill the two other files
 for k in range(nreads):
     read0 = create_read(reference0,read_length)
     reads_file.write(read0.split()[0]+"\n")
