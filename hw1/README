@@ -1,23 +1,92 @@
+PART 2:
 $ python3 generatedata.py 1000 600 50 "ref_1.txt" "reads_1.txt"
 reference length: 1000
 number reads: 600
 read length: 50
-aligns 0: 0.15333333333333332
-aligns 1: 0.7733333333333333
-aligns 2: 0.07333333333333333
+aligns 0: 0.15666666666666668
+aligns 1: 0.7283333333333334
+aligns 2: 0.115
 
 $ python3 generatedata.py 10000 6000 50 "ref_2.txt" "reads_2.txt"
 reference length: 10000
 number reads: 6000
 read length: 50
-aligns 0: 0.15033333333333335
-aligns 1: 0.746
-aligns 2: 0.10366666666666667
+aligns 0: 0.147
+aligns 1: 0.745
+aligns 2: 0.108
 
 $ python3 generatedata.py 100000 60000 50 "ref_3.txt" "reads_3.txt"
 reference length: 100000
 number reads: 60000
 read length: 50
-aligns 0: 0.15028333333333332
-aligns 1: 0.74855
-aligns 2: 0.10116666666666667
+aligns 0: 0.15021666666666667
+aligns 1: 0.7500166666666667
+aligns 2: 0.09976666666666667
+
+When designing the code for the handwritten set data in Part 2, I
+had a couple considerations: first, that the length of the reference
+would always be a multiple of 4 (so that we can have a precise 50% and
+75%). It will not always be the case, but if we create data set the way
+we do in Part 2, it will be datasets that can be divided by 4. Another
+consideration that I had is that in the reads that aligned 2 times, they
+could align more times but it would not be taken into account, we stop
+at the second time.
+
+I think that my code should be able to work correctly for other datasets
+because I never used the particular structure of the datasets to go
+through them, I assumed I did not know it.  
+
+I don't except an exact 15/75/10 distribution because the samples
+have a finite size. The 15/75/10 distribution is the limit towards
+which the actual distributions will tend when the sample size increases.
+
+I spent around 3 hours to write the code for this part. 
+
+PART 3:
+
+$ python3 processdata.py ref_1.txt reads_1.txt align_1.txt
+reference length: 1000
+number reads: 600
+align 0: 0.15666666666666668
+align 1: 0.7283333333333334
+align 2: 0.115
+elapsed time: 0.00824117660522461
+
+$ python3 processdata.py ref_2.txt reads_2.txt align_2.txt
+reference length: 10000
+number reads: 6000
+align 0: 0.147
+align 1: 0.745
+align 2: 0.108
+elapsed time: 0.25981903076171875
+
+$ python3 processdata.py ref_3.txt reads_3.txt align_3.txt
+reference length: 100000
+number reads: 60000
+align 0: 0.15021666666666667
+align 1: 0.7500166666666667
+align 2: 0.09976666666666667
+elapsed time: 23.83560347557068
+
+The distribution of reads that align 1 or 2 times is very similar to
+the one I computed but is not always exactly the same (it can be the
+same but it is not always the case). It is because some of 
+the reads of the first 50% align twice instead or once due to random
+chance. So, when the ditributions differ, there are always more reads
+that align 2 times in the version done by processdata.py than in
+the version I computed (and less reads that align 1 time).
+
+The distribution of reads that don't align is exactly the same.
+
+To estimate the relationship between the reference size and the
+execution time, I made the processdata.py file run for around 7 to 10
+reference lengths and I computed the profile of execution times
+depending on the reference length in a graph. (I adapted the number
+of reads so that it would be proportional).
+I got a polynomial relationship, of order 2. This relationship
+gave me an execution time of 18 billion seconds for a 3 billion
+reference size (the size of the human genome), which corresponds
+to approximately 208 days. So, it is not feasible to do it that 
+way.
+
+I spent around 2 hours to write the code for this part.

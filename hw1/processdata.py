@@ -13,6 +13,8 @@ alignment_file = sys.argv[3]
 ref_file = open(reference_file, "r")
 read_file = open(reads_file, "r")
 
+time0 = time.time()
+
 #we get the reference sequence
 for line in ref_file:
     reference = line.split()[0]
@@ -34,8 +36,6 @@ number_read_never = 0
 
 #the format of one item of the list is the format of
 #one line of the assignment file
-
-time0 = time.time()
 
 for k in range(len(reads_list)):
     read0 = reads_list[k]

@@ -80,23 +80,6 @@ number_read_once = 0
 number_read_twice = 0
 number_read_never = 0
 
-#function that chooses the type of read we want
-#this function increments the total number of reads per type
-
-def create_read(reference,read_length):
-    random_number = random.random()
-    if random_number < 0.75:
-        global number_read_once
-        number_read_once += 1
-        return create_read_once(reference,read_length)
-    if random_number < 0.85:
-        global number_read_twice
-        number_read_twice += 1
-        return create_read_twice(reference,read_length)
-    global number_read_never
-    number_read_never += 1
-    return create_read_never(reference,read_length)
-
 #we create the reference
 
 reference0 = create_reference(reference_length)
@@ -110,9 +93,20 @@ align_file = open("alignments.txt","w")
 ref_file.write(reference0 + "\n")
 ref_file.close()
 
-#we fill the two other files
+#we fill the two other files by choosing which type of
+#read we want
+
 for k in range(nreads):
-    read0 = create_read(reference0,read_length)
+    random_number = random.random()
+    if random_number < 0.75:
+        read0 = create_read_once(reference0,read_length)
+        number_read_once += 1
+    elif random_number < 0.85:
+        read0 = create_read_twice(reference0,read_length)
+        number_read_twice += 1
+    else:
+        read0 = create_read_never(reference0,read_length)
+        number_read_never += 1
     reads_file.write(read0.split()[0]+"\n")
     align_file.write(read0+"\n")
 
