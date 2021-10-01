@@ -26,11 +26,12 @@ aligns 2: 0.09976666666666667
 When designing the code for the handwritten set data in Part 2, I
 had a couple considerations: first, that the length of the reference
 would always be a multiple of 4 (so that we can have a precise 50% and
-75%). It will not always be the case, but if we create data set the way
-we do in Part 2, it will be datasets that can be divided by 4. Another
-consideration that I had is that in the reads that aligned 2 times, they
-could align more times but it would not be taken into account, we stop
-at the second time.
+75%). It will not always be the case, but if we create data sets the way
+we do in Part 2, it will be datasets that can be divided by 4. The
+code can handle reference lengths that are not as such but it has not be
+designed  for that. Another consideration that I had is that in the reads
+that aligned 2 times, they could align more times but it would not be
+taken into account, we stop at the second time.
 
 I think that my code should be able to work correctly for other datasets
 because I never used the particular structure of the datasets to go

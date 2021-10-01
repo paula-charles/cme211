@@ -37,6 +37,11 @@ def create_reference(length):
         random_part += random_letter
         if k >= length/2:
             repeated_part += random_letter
+    ref_len = len(random_part + repeated_part)
+    for k in range(length - ref_len):
+        random_num = random.randint(0,3)
+        random_letter = random_assignement(random_num)
+        random_part += random_letter
     return random_part + repeated_part
 
 #function to create a read that will only appear once
@@ -44,7 +49,7 @@ def create_reference(length):
 
 def create_read_once(reference, read_length):
     length = len(reference)
-    start_pos = random.randint(0,length/2-1)
+    start_pos = random.randint(0,int(length/2)-1)
     return reference[start_pos:start_pos+read_length] + " {}".format(start_pos)
 
 #function to create a read that will appear twice
@@ -52,7 +57,7 @@ def create_read_once(reference, read_length):
 
 def create_read_twice(reference, read_length):
     length = len(reference)
-    start_pos = random.randint(length/2,length*3/4-read_length)
+    start_pos = random.randint(int(length/2),int(length*3/4)-read_length)
     start_pos_2 = int(start_pos+length/4)
     return reference[start_pos:start_pos+read_length] + " {} {}".format(start_pos, start_pos_2)
 
