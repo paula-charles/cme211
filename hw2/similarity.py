@@ -112,34 +112,73 @@ def get_similar_movie(movie_data,m1):
                     nb_com_users = com_users
 
     return similar_movie,similarity_value,nb_com_users
+def main():
+    if len(sys.argv) < 3:
+        print("Usage:")
+        print("$ python3 similarity.py <data_file> <output_file> \
+        [user_thresh (default = 5)]")
+        sys.exit()
 
-most_similar = {}
+    data_file = sys.argv[1]
+    output_file = sys.argv[2]
 
-for m1 in movie_data.keys():
-    simi_data = get_similar_movie(movie_data,m1)
-    most_similar[m1]=simi_data
-
-list_movies = set(most_similar)
-
-for m1 in list_movies:
-    m1_data = most_similar[m1]
-    if m1_data[0] == "None":
-        output.write("{}\n".format(m1))
+    if len(sys.argv) <4:
+        user_thresh = 5
     else:
-        m1_output = "{} ({},{},{})\n"\
-    .format(m1,m1_data[0],m1_data[1],m1_data[2])
-    output.write(m1_output)
+        user_thresh = int(sys.argv[3])
 
-output.close()
+    ref_file = open(data_file, "r")
+    output = open(output_file, "w")
 
-total_time=round(time.time()-time0,3)
+    time0 = time.time()
 
-print("Input MovieLens file: {}".format(data_file))
-print("Output file for similarity data: {}".format(output_file))
-print("Minimum number of common users: {}".format(user_thresh))
-len_users = len(user_database)
-len_movies = len(movie_data.keys())
-print("Read {} lines with total of {} movies and {} users"\
-.format(nb_lines,len_movies,len_users))
-print("Computed similarities in {} seconds".format(total_time))
+    movie_data = {}
 
+    nb_lines = 0
+    user_database = set()
+
+    for line in ref_file:
+        nb_lines +=1
+        user_id = int(line.split()[0])
+        user_database.add(user_id)
+        movie_id = int(line.split()[1])
+        rate = int(line.split()[2])
+        if movie_id in movie_data:
+            movie_data[movie_id][user_id]=rate
+        else:
+            movie_data[movie_id]={}
+            movie_data[movie_id][user_id]=rate
+
+    ref_file.close()
+    most_similar = {}
+
+    for m1 in movie_data.keys():
+        simi_data = get_similar_movie(movie_data,m1)
+        most_similar[m1]=simi_data
+
+    list_movies = set(most_similar)
+
+    for m1 in list_movies:
+        m1_data = most_similar[m1]
+        if m1_data[0] == "None":
+            output.write("{}\n".format(m1))
+        else:
+            m1_output = "{} ({},{},{})\n"\
+            .format(m1,m1_data[0],m1_data[1],m1_data[2])
+            output.write(m1_output)
+
+    output.close()
+
+    total_time=round(time.time()-time0,3)
+
+    print("Input MovieLens file: {}".format(data_file))
+    print("Output file for similarity data: {}".format(output_file))
+    print("Minimum number of common users: {}".format(user_thresh))
+    len_users = len(user_database)
+    len_movies = len(movie_data.keys())
+    print("Read {} lines with total of {} movies and {} users"\
+    .format(nb_lines,len_movies,len_users))
+    print("Computed similarities in {} seconds".format(total_time))
+
+if __name__ == "__main__":
+    main()
