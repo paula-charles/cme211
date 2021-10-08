@@ -1,6 +1,10 @@
 import sys
 import time
 
+#--codequality_0
+#--As before, if __name__ == "__main__":
+#--END
+
 if len(sys.argv) < 3:
     print("Usage:")
     print("$ python3 processdata.py <ref_file> <reads_file> <align_file>")
@@ -71,3 +75,7 @@ print("align 0: {}".format(number_read_never/nreads))
 print("align 1: {}".format(number_read_once/nreads))
 print("align 2: {}".format(number_read_twice/nreads))
 print("elapsed time: {}".format(time1-time0))
+
+#--functionality_0
+#--good job!
+#--END

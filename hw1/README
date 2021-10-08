@@ -79,6 +79,9 @@ the version I computed (and less reads that align 1 time).
 
 The distribution of reads that don't align is exactly the same.
 
+#--documentation_0
+#--Awesome analysis
+#--START
 To estimate the relationship between the reference size and the
 execution time, I made the processdata.py file run for around 7 to 10
 reference lengths and I computed the profile of execution times
@@ -89,5 +92,6 @@ gave me an execution time of 18 billion seconds for a 3 billion
 reference size (the size of the human genome), which corresponds
 to approximately 208 days. So, it is not feasible to do it that 
 way.
+#--END
 
 I spent around 2 hours to write the code for this part.

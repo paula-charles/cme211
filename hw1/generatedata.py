@@ -1,10 +1,18 @@
 import sys
 import random
 
+#--codequality_0
+#--Imports need to be in lexicographic order
+#--END
+
 if len(sys.argv) < 5:
     print("Usage:")
     print("$ python3 generatedata.py <ref_length> <nreads> <read_len> <ref_file> <reads_file>")
     sys.exit()
+
+#--codequality_0
+#--No if __name__ == "__main__": block
+#--END
 
 reference_length = sys.argv[1]
 nreads = sys.argv[2]
@@ -15,6 +23,10 @@ reads_file = sys.argv[5]
 reference_length = int(reference_length)
 nreads = int(nreads)
 read_length = int(read_length)
+
+#--codequality_0
+#--Functions need to be declared after imports but before main
+#--END
 
 #function to match a number between 0 and 3 to one of the 4 letters
 def random_assignement(k):
@@ -124,3 +136,8 @@ print("read length: {}".format(read_length))
 print("aligns 0: {}".format(number_read_never/nreads))
 print("aligns 1: {}".format(number_read_once/nreads))
 print("aligns 2: {}".format(number_read_twice/nreads))
+
+
+#--functionality_0
+#--The reads file shouldn't be storing indices
+#--END
