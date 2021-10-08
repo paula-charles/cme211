@@ -1,0 +1,96 @@
+FILE:          README
+DOCUMENTATION  
+
+COMMENTS:
+-Awesome analysis
+
+RELEVANT CODE:
+To estimate the relationship between the reference size and the
+execution time, I made the processdata.py file run for around 7 to 10
+reference lengths and I computed the profile of execution times
+depending on the reference length in a graph. (I adapted the number
+of reads so that it would be proportional).
+I got a polynomial relationship, of order 2. This relationship
+gave me an execution time of 18 billion seconds for a 3 billion
+reference size (the size of the human genome), which corresponds
+to approximately 208 days. So, it is not feasible to do it that 
+way.
+
+                  
+
+
+--------------------------
+FILE:          generatedata.py
+CODEQUALITY    
+
+COMMENTS:
+-Imports need to be in lexicographic order
+
+                  
+
+
+--------------------------
+FILE:          generatedata.py
+CODEQUALITY    
+
+COMMENTS:
+-No if __name__ == "__main__": block
+
+                  
+
+
+--------------------------
+FILE:          generatedata.py
+CODEQUALITY    
+
+COMMENTS:
+-Functions need to be declared after imports but before main
+
+                  
+
+
+--------------------------
+FILE:          generatedata.py
+FUNCTIONALITY  
+
+COMMENTS:
+-The reads file shouldn't be storing indices
+
+                  
+
+
+--------------------------
+FILE:          processdata.py
+CODEQUALITY    
+
+COMMENTS:
+-As before, if __name__ == "__main__":
+
+                  
+
+
+--------------------------
+FILE:          processdata.py
+FUNCTIONALITY  
+
+COMMENTS:
+-good job!
+
+                  
+
+
+--------------------------
+
+GRADING TA                  
+SUNet ID: maxfit, GitHub ID trevormaxfield
+###################################################
+
+FUNCTIONALITY SCORE:                      +
+###################################################
+
+WRITEUP SCORE:                            +
+###################################################
+
+CODEQUALITY SCORE:                        +
+###################################################
+If you have any problem about grading result, please file an issue in your GitHub repo.
