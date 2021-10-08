@@ -1,1 +1,51 @@
 Homework 2 of Paula Charles
+
+Part 1:
+
+1. When creating the test data, my biggest concern
+was representing as much situations as possible.
+I assumed that the user_id and movie_id were unique:
+several occurences of the same movie_id would represent
+the same movie.
+
+2. When creating this datafile, I wanted to make
+sure that various situations woul be represented:
+having only one rating, having the denominator equal
+to zero, having a movie with only negative similarities,
+having a movie with no similarities.
+
+3. I did create a reference solution. I only have 4 
+movies, so I calculated the similarities between movies
+by hand and found out the most similar movie for each
+of the movies. 
+
+Part 2: 
+
+$ python3 similarity.py ml-100k/u.data similarities.txt
+Input MovieLens file: ml-100k/u.data
+Output file for similarity data: similarities.txt
+Minimum number of common users: 5
+Read 100000 lines with total of 1682 movies and 943 users
+Computed similarities in 84.964 seconds
+
+$ head -n 10 similarities.txt 
+1 (885,0.9,6)
+2 (1153,0.91,7)
+3 (1061,0.93,7)
+4 (35,0.8,6)
+5 (1086,0.89,6)
+6 (1008,0.94,8)
+7 (968,1.0,7)
+8 (590,0.86,6)
+9 (854,0.9,6)
+10 (932,0.93,6)
+
+When creating my similarity.py, I created a dictionary database
+for my movies. Then, I created a function to get the average
+rating of a movie and a function to get the common users
+of 2 movies. I used these 3 elements to compute the similarity
+between 2 movies entered as parameters. Then, I used this similarity
+to find out the most similar movie for 1 movie entered as a
+parameter. Then, I created a loop on the database of movies to
+get the most similar movie for each movie of the database.
+
