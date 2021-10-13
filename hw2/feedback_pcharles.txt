@@ -1,0 +1,39 @@
+FILE:          README
+DOCUMENTATION  
+
+COMMENTS:
+-unfortunately, your output log has incorrect values
+-Please come see me in OH if you would like to debug
+
+                  
+
+
+--------------------------
+FILE:          similarity.py
+FUNCTIONALITY  
+
+COMMENTS:
+-incorrect similarity values
+-somehow, your values are lower than expected
+-same in README, but I have not taken off points there
+-we need to debug, please come see me at OH
+
+POINTS DEDUCTED: 1
+
+
+--------------------------
+
+GRADING TA                  
+SUNet ID: adkakne, GitHub ID aasavari-kakne
+###################################################
+
+FUNCTIONALITY SCORE:                     ok
+###################################################
+
+WRITEUP SCORE:                            +
+###################################################
+
+CODEQUALITY SCORE:                        +
+###################################################
+You used 0 late days on this assignment.
+If you have any problem about grading result, please file an issue in your GitHub repo.
