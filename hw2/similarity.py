@@ -1,3 +1,17 @@
+#--functionality_1
+#--incorrect similarity values
+#--somehow, your values are lower than expected
+#--same in README, but I have not taken off points there
+#--we need to debug, please come see me at OH
+#--END
+
+
+#--code-quality_0
+#--please do not leave active file handles lying around
+#--it is quite unsafe, try to keep lifetime of file handles to minimum
+#--END
+
+
 import math as math
 import sys
 import time as time
