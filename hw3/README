@@ -1,2 +1,48 @@
-This is the README for Paula Charles' HW3
+When creating the class Airfoil, I had several considerations:
+
+- I created methods for each step of the way towards getting
+the lift coefficient. I called every method in the __init__
+function. I have considered calling them into the __rep__
+function, but it would mean making the calculations every time
+I want to print the airfoil, so it felt less interesting.
+
+- Also, calling the methods in the --init-- function enables
+me to know if there is an issue with my airfoil as soon as 
+it is created (if there is no xy.dat file for instance), so
+it is useful.
+
+- If there is no xy.dat file or no alpha file at all, an error
+is raised. An error will also be raised if the directory does
+not exist.
+
+- If the coordinates of xy.dat don't have the right format (for
+instance, if there is a letter among the coordinates), it will
+raise an issue because it prevents us from doing the calculations.
+It is fatal for the class, hence the raising of an issue.
+
+- On the contrary, if there is an issue with one of the alpha
+files, I did not want this issue preventing us from doing the 
+calculations on the other alpha files. Therefore, i did not
+raise an issue. 
+So, if an alpha file does not have an angle in its name, or if
+it has a faulty format (if there are letters instead of numbers
+inside the file), it won't raise an issue, it will print the
+fact that it is faulty and the reason for this, but the program
+will still go on and calculate the lift coefficient for the 
+other alpha files. Hence, once we print the airfoil, we will get
+the results for every alpha except the faulty one(s).
+For instance, we can get:
+
+nacaOther/alpha+3.0.dat does not have the right format.
+Test case: NACA 0012
+
+
+alpha     cl           stagnation pt
+-----  -------  --------------------------
+-3.00  -0.3622  ( 0.0030,  0.0094)  0.9906
+ 0.00  -0.0000  ( 0.0000,  0.0000)  0.9944
+ 6.00   0.7235  ( 0.0099, -0.0170)  0.9967
+ 9.00   1.0827  ( 0.0219, -0.0246)  0.9977
+
+
 \n
