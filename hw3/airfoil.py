@@ -17,8 +17,12 @@ class Airfoil:
         if os.path.isdir(self.inputdir) == False:
             raise RuntimeError("the directory {} does not "\
                               "exist.".format(self.inputdir))
+#--functionality_1
+#--We aren't guaranteed that the user ends their path with a '/' (use os.path.join)
+#--START
         if os.path.isfile(self.inputdir+"xy.dat") == False:
             raise RuntimeError("there is no xy.dat file")
+#--END
         coord_file = open(self.inputdir+"xy.dat", "r")
         self.coord = []
         self.name = coord_file.readline()
@@ -37,6 +41,9 @@ class Airfoil:
         self.get_total_cx_cy()
         self.get_lift_coef()
         self.get_stagnation_point()
+#--codequality_0
+#--Creating member variables (self. variables) in your init improves readability
+#--END
 
     def get_edges(self):
         '''This function enables us to get the coordinates
@@ -48,6 +55,9 @@ class Airfoil:
         pos_trail = 0
         leading = self.coord[0][0]
         pos_lead = 0
+#--codequality_0
+#--This works, but you can definitely do this much simpler with min/max
+#--START
         for k in range(len(self.coord)):
             if self.coord[k][0] < leading:
                 leading = self.coord[k][0]
@@ -55,6 +65,7 @@ class Airfoil:
             if self.coord[k][0] > trailing:
                 trailing = self.coord[k][0]
                 pos_trail = k
+#--END
         self.trailing_edge = self.coord[pos_trail]
         self.leading_edge = self.coord[pos_lead]
 
@@ -97,8 +108,12 @@ class Airfoil:
     def get_cx_cy_point(self,k,alpha):
         '''Calculates delta cx and delta cy between the points
         in position k and k+1 and for the angle alpha'''
+#--codequality_0
+#--You're re-computing dx and dy for each alpha, can move this outside the method for a bit more efficiency
+#--START
         dx = self.coord[k+1][0]-self.coord[k][0]
         dy = self.coord[k+1][1]-self.coord[k][1]
+#--END
         cp = self.cp_data[alpha][k]
         dcx = - cp * dy / self.chord_len
         dcy = cp * dx / self.chord_len
@@ -163,3 +178,7 @@ class Airfoil:
                    self.stagn[alpha][2])
             string +="\n"
         return(string)
+
+#--functionality_0
+#--Overall nice job!
+#--END
