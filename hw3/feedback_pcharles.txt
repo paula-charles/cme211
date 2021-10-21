@@ -1,0 +1,105 @@
+FILE:          README
+DOCUMENTATION  
+
+COMMENTS:
+-Check the pinned piazza post "Common HW Issues" about this
+
+RELEVANT CODE:
+\n
+
+                  
+
+
+--------------------------
+FILE:          README
+DOCUMENTATION  
+
+COMMENTS:
+-No discussion of OOP
+
+POINTS DEDUCTED: 1
+
+
+--------------------------
+FILE:          airfoil.py
+FUNCTIONALITY  
+
+COMMENTS:
+-We aren't guaranteed that the user ends their path with a '/' (use os.path.join)
+
+RELEVANT CODE:
+if os.path.isfile(self.inputdir+"xy.dat") == False:
+            raise RuntimeError("there is no xy.dat file")
+
+POINTS DEDUCTED: 1
+
+
+--------------------------
+FILE:          airfoil.py
+CODEQUALITY    
+
+COMMENTS:
+-Creating member variables (self. variables) in your init improves readability
+
+                  
+
+
+--------------------------
+FILE:          airfoil.py
+CODEQUALITY    
+
+COMMENTS:
+-This works, but you can definitely do this much simpler with min/max
+
+RELEVANT CODE:
+for k in range(len(self.coord)):
+            if self.coord[k][0] < leading:
+                leading = self.coord[k][0]
+                pos_lead = k
+            if self.coord[k][0] > trailing:
+                trailing = self.coord[k][0]
+                pos_trail = k
+
+                  
+
+
+--------------------------
+FILE:          airfoil.py
+CODEQUALITY    
+
+COMMENTS:
+-You're re-computing dx and dy for each alpha, can move this outside the method for a bit more efficiency
+
+RELEVANT CODE:
+dx = self.coord[k+1][0]-self.coord[k][0]
+        dy = self.coord[k+1][1]-self.coord[k][1]
+
+                  
+
+
+--------------------------
+FILE:          airfoil.py
+FUNCTIONALITY  
+
+COMMENTS:
+-Overall nice job!
+
+                  
+
+
+--------------------------
+
+GRADING TA                  
+SUNet ID: maxfit, GitHub ID trevormaxfield
+###################################################
+
+FUNCTIONALITY SCORE:                     ok
+###################################################
+
+WRITEUP SCORE:                           ok
+###################################################
+
+CODEQUALITY SCORE:                        +
+###################################################
+You used 0 late days on this assignment.
+If you have any problem about grading result, please file an issue in your GitHub repo.
