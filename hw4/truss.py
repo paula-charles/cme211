@@ -50,6 +50,7 @@ class Truss:
             x = [self.joints[point1]['x'],self.joints[point2]['x']]
             y = [self.joints[point1]['y'],self.joints[point2]['y']]
             plt.plot(x, y,'b')
+            plt.margins(x=0.2, y=0.2)
             plt.savefig(output_plot)
 
     def get_num_fixed_joints(self):
