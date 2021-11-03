@@ -51,7 +51,11 @@ class Truss:
             y = [self.joints[point1]['y'],self.joints[point2]['y']]
             plt.plot(x, y,'b')
             plt.margins(x=0.2, y=0.2)
+#--codequality_0
+#--Saving fig in loop
+#--START
             plt.savefig(output_plot)
+#--END
 
     def get_num_fixed_joints(self):
         '''This method finds out the number of fixed joints.
@@ -143,3 +147,11 @@ class Truss:
             string += " "*len0
             string += num_str
         return string
+
+#--functionality_0
+#--Nice work, correct output
+#--END
+
+#--codequality_0
+#--Nice, readable code
+#--END

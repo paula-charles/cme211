@@ -1,0 +1,58 @@
+FILE:          README.tex
+DOCUMENTATION  
+
+COMMENTS:
+-Nice writeup
+
+                  
+
+
+--------------------------
+FILE:          truss.py
+CODEQUALITY    
+
+COMMENTS:
+-Saving fig in loop
+
+RELEVANT CODE:
+plt.savefig(output_plot)
+
+                  
+
+
+--------------------------
+FILE:          truss.py
+FUNCTIONALITY  
+
+COMMENTS:
+-Nice work, correct output
+
+                  
+
+
+--------------------------
+FILE:          truss.py
+CODEQUALITY    
+
+COMMENTS:
+-Nice, readable code
+
+                  
+
+
+--------------------------
+
+GRADING TA                  
+SUNet ID: maxfit, GitHub ID trevormaxfield
+###################################################
+
+FUNCTIONALITY SCORE:                      +
+###################################################
+
+WRITEUP SCORE:                            +
+###################################################
+
+CODEQUALITY SCORE:                        +
+###################################################
+You used 0 late days on this assignment.
+If you have any problem about grading result, please file an issue in your GitHub repo.
