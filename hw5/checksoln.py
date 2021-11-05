@@ -53,9 +53,20 @@ def is_the_solution_staying_inside(maze_file,sol):
             return False
     return True
 
+def is_the_solution_entering_and_exiting_properly(maze_file,sol):
+    with open(maze_file,'r') as f:
+        line = f.readline()
+        row = int(line.split()[0])
+    if int(sol[0][0])!=0:
+        return False
+    if int(sol[len(sol)-1][0])!= row-1:
+        return False
+    return True
+
 if is_the_solution_avoiding_walls(maze_file,maze_solution) and\
 is_the_solution_moving_properly(sol) and\
-is_the_solution_staying_inside(maze_file,sol):
+is_the_solution_staying_inside(maze_file,sol) and\
+is_the_solution_entering_and_exiting_properly(maze_file,sol):
     print('Solution is valid!')
 
 else:
