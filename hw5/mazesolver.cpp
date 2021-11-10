@@ -1,7 +1,15 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-
+//--functionality_0
+//--nice job! 
+//--END
+//--codequality_0
+//--nice.
+//--END
+//--documentation_0
+//--good readme. please put more effort into commenting your files.
+//--END
 int main(int argc, char *argv[]){
   if (argc < 3) {
     std::cout << "Usage:"<<std::endl;
@@ -139,3 +147,4 @@ int main(int argc, char *argv[]){
     g.close();
   }
 }       
+

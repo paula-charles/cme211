@@ -1,0 +1,45 @@
+FILE:          mazesolver.cpp
+FUNCTIONALITY  
+
+COMMENTS:
+-nice job!
+
+                  
+
+
+--------------------------
+FILE:          mazesolver.cpp
+CODEQUALITY    
+
+COMMENTS:
+-nice.
+
+                  
+
+
+--------------------------
+FILE:          mazesolver.cpp
+DOCUMENTATION  
+
+COMMENTS:
+-good readme. please put more effort into commenting your files.
+
+                  
+
+
+--------------------------
+
+GRADING TA                  
+SUNet ID: samuellr, GitHub ID sam-randall
+###################################################
+
+FUNCTIONALITY SCORE:                      +
+###################################################
+
+WRITEUP SCORE:                            +
+###################################################
+
+CODEQUALITY SCORE:                        +
+###################################################
+You used 0 late days on this assignment.
+If you have any problem about grading result, please file an issue in your GitHub repo.
