@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{algorithm2e}
+\usepackage[T1]{fontenc}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.5em}
 
@@ -64,7 +65,9 @@ the vector of solutions in place.
 \begin{algorithm}[H]
  \SetAlgoLined
  \KwData{matrix A, vector b, vector x, double tol}
- \KwResult{Number of iterations to reach convergence (-1 if not convergent), updated vector of solutions}
+ \KwResult{Number of iterations to reach convergence (-1 
+if not convergent). The vector of solutions is not returned 
+but is updated in place.}
  Initialization: u0 = x;
  
  success = 0; \tcp{it will tell us if algorithm converges}
