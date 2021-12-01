@@ -1,0 +1,38 @@
+This code creates a class called image that
+has several methods: loading an image, blurring
+it, computing its sharpness and saving this image to
+an output file.
+
+The image is represented as a boost multidimensional
+array. To load this array from the jpg file and to save
+the array to a new jpg file, we are using functions 
+that are present in the file hw6.hpp/hw6.cpp.
+
+To blur it and compute its sharpness, we use a convolution
+function. This function creates an output multidimensional
+array that replaces a data point of the input by an average
+over its surrounding values. To do that, the function starts
+by widening the array to make sure that all data points in the
+original array do have enough surrounding neighboors. Then it
+multiplies a small matrix centered on the data points by a
+kernel matrix of the same size to average the value. This
+results in a blurred image.
+The higher the number of neighboors over which we average
+(the higher the size of the sub-matrix and of the kernel),
+the more blurred the image becomes.
+
+For computing the sharpness, we use the same convolution
+matrix, but instead of multiplying the submatrix by a kernel
+that averages it, we multiply it by a laplacian matrix. This
+results in an output matrix, we take its maximum data point 
+and we return it: it is the sharpness. The more blurred the 
+image is, the lower its sharpness is.
+
+To do that, we used arrays of unsigned characters to
+represent images. However, when we do calculations, we 
+need to convert these unsigned characters to float, because
+we may be dealing with negative values (it is the case in the
+laplacian). So, after the calculations, we need to translate
+these values back to unsigned characters. We first need to make
+sure that these values are positive and under 255, otherwise it
+might create issues.
