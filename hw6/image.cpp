@@ -67,7 +67,7 @@ void Convolution(boost::multi_array<unsigned char,2>& input,
       a[i][j]=(float)input[nrows_input-1][ncol_input-1];
   }
 
-  float conv = 0;
+  float conv;
   for (unsigned int i = 0; i < nrows_input; i++){
     for (unsigned int j = 0; j < ncol_input; j++){
       conv =0;
@@ -98,6 +98,11 @@ void image::BoxBlur(int kernel_size){
 unsigned int image::Sharpness(void){
   unsigned int maximum = 0;
 
+  unsigned int nrows_input = (unsigned int)img_.shape()[0];
+  unsigned int ncol_input = (unsigned int)img_.shape()[1];
+
+  boost::multi_array<unsigned char, 2> output(boost::extents[nrows_input][ncol_input]);
+
   boost::multi_array<float, 2> kernel(boost::extents[3][3]);
   kernel[0][0] = 0;
   kernel[0][1] = 1;
@@ -109,11 +114,11 @@ unsigned int image::Sharpness(void){
   kernel[2][1] = 1;
   kernel[2][2] = 0;
 
-  Convolution(img_,img_,kernel);
+  Convolution(img_,output,kernel);
 
-  for (unsigned int n = 0; n < img_.num_elements(); n++) {
-    if ((unsigned int)img_.data()[n]>maximum)
-      maximum = (unsigned int)img_.data()[n];
+  for (unsigned int n = 0; n < output.num_elements(); n++) {
+    if ((unsigned int)output.data()[n]>maximum)
+      maximum = (unsigned int)output.data()[n];
   }
   return maximum;
 }
