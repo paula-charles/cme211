@@ -19,6 +19,7 @@ int CGSolver(std::vector<double> &val,
              std::vector<int>    &col_idx,
              std::vector<double> &b,
              std::vector<double> &x,
-             double              tol);
+             double              tol,
+             std::string soln_prefix);
 
 #endif /* CGSOLVER_HPP */

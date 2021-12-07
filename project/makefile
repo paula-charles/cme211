@@ -1,8 +1,8 @@
 CXX:= g++
-CXXflags := -std=c++11 -Wall -Wconversion -Wextra
+CXXFLAGS := -O3 -Wall -Wextra -Wconversion -std=c++11
 TARGET := main
-OBJS:= main.o COO2CSR.o matvecops.o CGSolver.o
-INCS:= main.hpp COO2CSR.hpp matvecops.hpp CGSolver.hpp
+OBJS:= main.o heat.o sparse.o COO2CSR.o CGSolver.o matvecops.o
+INCS:= main.hpp heat.hpp sparse.hpp COO2CSR.hpp CGSolver.hpp matvecops.hpp
 
 $(TARGET): $(OBJS)
 	$(CXX) -o $(TARGET) $(OBJS)

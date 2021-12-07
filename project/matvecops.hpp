@@ -21,21 +21,19 @@
  * a vector.
  */
 
-std::vector<double> addition(const std::vector<double> &a,
-                             const std::vector<double> &b);
+std::vector<double> addition(std::vector<double> a, std::vector<double> b);
 
-std::vector<double> substraction(const std::vector<double> &a,
-                                 const std::vector<double> &b);
+std::vector<double> substraction(std::vector<double> a, std::vector<double> b);
 
-std::vector<double> mult_matrix_vec(const std::vector<double> &val,
-                                    const std::vector<int>    &row_ptr,
-                                    const std::vector<int>    &col_idx,
-                                    const std:: vector<double> &v);
+std::vector<double> mult_matrix_vec(std::vector<double> &val,
+                                    std::vector<int>    &row_ptr,
+                                    std::vector<int>    &col_idx,
+                                    std:: vector<double> &v);
 
-double mult_vect(const std::vector<double> &a, const std::vector<double> &b);
+double mult_vect(std::vector<double> a, std::vector<double> b);
 
-double L2norm(const std::vector<double> &v);
+double L2norm(std::vector<double> v);
 
-std::vector<double> mult_vect_scal(const std::vector<double> &v,double a);
+std::vector<double> mult_vect_scal(std::vector<double> v,double a);
 
 #endif /* MATVECOPS_HPP */

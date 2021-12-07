@@ -1,4 +1,8 @@
+#include <sstream>
+#include <string>
+#include <iomanip>
 #include <iostream>
+#include <fstream>
 
 #include "CGSolver.hpp"
 #include "matvecops.hpp"
@@ -8,7 +12,8 @@ int CGSolver(std::vector<double> &val,
              std::vector<int>    &col_idx,
              std::vector<double> &b,
              std::vector<double> &x,
-             double              tol){
+             double              tol,
+             std::string soln_prefix){
 
   /* The int success enables us to know if the solver converged.*/
   int success = 0;
@@ -26,9 +31,18 @@ int CGSolver(std::vector<double> &val,
   int niter = 0;
 
   int nitermax = (int)row_ptr.size()-1;
-
   while (niter < nitermax){
-
+    if (niter%10 == 0){
+      std::ostringstream sol;
+      sol << std::setfill('0') << std::setw(3) << niter;
+      std::string sol_file = soln_prefix+sol.str()+".txt";
+      std::ofstream g(sol_file);
+      if (g.is_open()){
+        for (unsigned n=0;n<u0.size();n++)
+          g<< std::setprecision(4) << std::scientific << u0[n] << std::endl;
+        g.close();
+      }
+    }
     niter = niter + 1;
 
     std::vector<double> q0 = mult_matrix_vec(val,row_ptr,col_idx,p0);
@@ -54,6 +68,16 @@ int CGSolver(std::vector<double> &val,
   /* We update the solution vector to its final value*/
 
   x = u0;
+
+  std::ostringstream sol;
+  sol << std::setfill('0') << std::setw(3) << niter;
+  std::string sol_file = soln_prefix+sol.str()+".txt";
+  std::ofstream g(sol_file);
+  if (g.is_open()){
+    for (unsigned n=0;n<u0.size();n++)
+      g<< std::setprecision(4) << std::scientific << u0[n] << std::endl;
+      g.close();
+  }
 
   if (success == 0)
     return -1;
