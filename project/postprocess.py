@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use('Agg')
+
 import numpy as np
 from math import exp
 import matplotlib.pyplot as plt
@@ -50,12 +53,38 @@ for j in range(ncols):
     j_idx.append(j)
     val.append(T_c(j,Tc))
 
+X2 = [k*h for k in range(ncols)]
+Y2 = [0 for k in range(ncols)]
+
+T_mean = mean(val)
+
+for j in range(ncols):
+    i0 = 0
+    diff = 1000
+    for k in range(ncols*nrows):
+        if j_idx[k]==j:
+            if abs(val[k]-T_mean) < diff:
+                i0 = i_idx[k]
+                diff = abs(val[k]-T_mean)
+    Y2[j]=i0
+
+for k in range(len(Y2)):
+    Y2[k]=width - Y2[k]*h
+
 for k in range(len(i_idx)):
     i_idx[k]=width - i_idx[k]*h
 for k in range(len(j_idx)):
     j_idx[k]=j_idx[k]*h
 
-T_mean = mean(val)
+X = np.reshape(j_idx,(nrows, ncols))
+Y = np.reshape(i_idx,(nrows, ncols))
+Z = np.reshape(val,(nrows, ncols))
+
+plt.pcolor(X, Y, Z)
+plt.colorbar()
+plt.plot(X2, Y2, '-k')
+plt.axis([0, length, -width, 2*width])
+plt.savefig("Pseudocolor plot.pdf")
 
 print("Input file processed: ",sys.argv[1])
 print("Mean Temperature: ",round(T_mean,5))
