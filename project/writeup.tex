@@ -3,71 +3,68 @@
 \usepackage[T1]{fontenc}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.5em}
+\usepackage{graphicx}
 
-\title{Project part 1 - Writeup}
+\title{Project CME211 - Writeup}
 \author{Paula Charles}
-\date{November 2021}
+\date{December 2021}
 
 \begin{document}
 
 \maketitle
 
-\section{Explanation of the CG Solver}
+\section{Introduction}
 
-To implement the Conjugate gradient code, I used several 
-functions to prevent redundancy. These functions can be found
- in the matvecops.cpp file and enable us to 
-make basic vector / matrix calculations. They are of several types :
+In this project, we aim at solving 2D heat equations. To do 
+so, we use sparse matrix solvers in C++. We use the finite-
+difference method to discretize the system into a grid of 
+points. We then solve this system using our matrix solvers 
+and vizualize the results. This enables us to 
+visualize heat maps of systems that are in contact with hot and 
+cold streams, and for which the temperature is not uniform.
 
-First, functions that take only vectors as inputs: the 
-function "addition" returns the sum of 2 vectors; the 
-function "substraction" returns the substraction of the 
-first vector passed as a parameter by the second one; the
-function "mult vect" multiplies the transpose of a vector 
-by another vector: it returns a double. I chose to use that 
-last function instead of a more precise function that 
-takes only one input and returns the multiplication of 
-the transpose of this vector by itself, because there is 
-one instance in the CG solver that uses 2 different vectors. 
-The last function that takes a vector as the input is 
-calculation of the L2 norm. It returns a double.
+This solution is only able to solve simplified periodic systems.
 
-Then, there are 2 hybrid functions: one takes a matrix and a
- vector as inputs and multiplies the matrix by the vector 
-on the right. The matrix is in the CSR format. The other 
-function takes a scalar and a vector as inputs and returns 
-the multiplication of that vector by the scalar.
+\section{CG solver implementation}
 
-All these functions do not modify their inputs. They either 
-return a double or a vector. They enable me to write the 
-CG algorithm in a smoother way, without having to detail 
-the calculations every time.
+To implement the CG solver, we use 2 classes:
 
-We then use this CG solver in the main() function: we 
-extract a COO matrix from the input file, that we convert 
-in place to a CSR thanks to the function COO2CSR(). We then 
-initialize the vector of solutions to a vector of ones and 
-the vector on the right hand side to a vector of zeros. 
-We also define the threshold as the size of the matrix. 
-It is then that the CG algorithm is used.
-
-This CG algorithm iterates over a vector of residuals, r0. 
-It is updating the vector of solutions and the vector 
-of residuals until the latest is smaller than a given threshold. In 
-that case, we estimate that we have found the 
-solution to the linear equations. We then return the number 
-of iterations it took to reach this threshold and update 
-the vector of solutions in place.
-
-
-\section{CG algorithm}
+\begin{itemize}
+    \item The Class SparseMatrix that handles sparse matrices. 
+    It initializes a matrix as a COO matrix, which can then be 
+    modified thanks to its method AddEntry(). It has then some 
+    more methods that can be used for our 2D heat problem: a 
+    method that converts the COO matrix into a CSR matrix 
+    (that is more efficient for calculations) and a 
+    get\_CGSolver() method that uses the files CGSolver.hpp/cpp 
+    to get a solution. A pseudo-code for this solver is available below.
+    
+    To implement the Conjugate gradient code, we used several 
+    functions to prevent redundancy. These functions can be found
+    in the matvecops.cpp file and enable us to 
+    make basic vector / matrix calculations.
+    
+    \item The Class HeatEquation2D that is the center of the 
+    heat equation and returns the solution files. It has mainly 
+    2 methods. A first method, SetUp() to set up the system, 
+    get the matrix and vectors that constitute the numerical 
+    equation. It takes an input file as input (see the 
+    specifications of that input file in the User
+    Guide). The matrix created 
+    is a COO matrix and its size is the number of unknowns of 
+    the system: every grid point except the boundary ones (which 
+    are known) and the periodic ones.
+    
+    A second method, Solve(), solves the equations, by using the 
+    class SparseMatrix method get\_CGSolver()  and returns the 
+    solution files (see User 
+    Guide for more description of these files).
+\end{itemize}
 
 \begin{algorithm}[H]
  \SetAlgoLined
  \KwData{matrix A, vector b, vector x, double tol}
- \KwResult{Number of iterations to reach convergence (-1 
-if not convergent). The vector of solutions is not returned 
-but is updated in place.}
+ \KwResult{Number of iterations to reach convergence (-1 if not convergent), updated vector of solutions}
  Initialization: u0 = x;
  
  success = 0; \tcp{it will tell us if algorithm converges}
@@ -108,5 +105,74 @@ but is updated in place.}
  \eIf{success = 0}{
  return -1;}{return niter;}
 \end{algorithm}
+
+\section{Users guide}
+
+To compile the code, one needs to create an input file. This input
+file needs:
+\begin{itemize}
+    \item In the first line, separated by spaces: the length, 
+    the width and the grid size. The length and width should be 
+    multiples of the grid size (otherwise, an error will be 
+    created).
+    \item In the second line, separated by spaces: the cold temperature
+     and the hot temperature.
+\end{itemize}
+
+Once that input is created, we need to compile the code and for that,
+ we can use the makefile file: we only need to write 
+ \textbf{\textit{make}} in the 
+ command.
+
+Then, we need to run the files: we do that thanks to the command: 
+
+\textbf{\textit{./main [name of your input file] 
+[generic name of your solution files].}}
+
+If the CG solver converges, it will print in how many 
+iterations this solver converges and will create 
+solution files for the vector of unknowns every 10 iterations. 
+These solution files are called after the generic name you gave 
+in the command line. They will for instance be called 
+solution000.txt, solution010.txt and so on if you asked for the 
+generic name "solution".
+
+The files of solutions print out every coordinate of the vector 
+of unknowns. Let's call this vector (u\_i,j)i,j. Then, the 
+file of solution prints out: u\_1,0, u\_1,1, ... u\_1,n-1, 
+u\_2,0, ..., u\_2,n-1, ... u\_m-1,n-1.
+In this file, the first and last rows (i=0 and i=m) are not printed, 
+as they are not unknown (we know their value: the boundary temperatures) 
+The last column is also not printed (j=n), because it is the 
+same as the first (we consider a periodic system).
+
+To see a plot representing the value of this vector across the 
+system, we can use a python file thanks to the command: 
+
+\textbf{\textit{python3 postprocess.py input1.txt solution110.txt}}
+
+It will create a pdf that can be seen. Please find on the next page
+an example of such a file. It will also print the mean temperature 
+of the system represented by the solution file.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.8]{Pseudocolor plot.pdf}
+    \caption{An example of a pseudo color plot with an isoline
+    to represent the location of the mean temperature}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{thebibliography}{2}
+\bibitem{CME211Part2}
+CME 211: Project Part 2 (Handout)
+, Andreas Santucci, December 2021. Stanford
+ CA.
+\bibitem{CME211Part1}
+CME 211: Project Part 1 (Handout)
+, Andreas Santucci, November 2021. Stanford
+ CA.
+
+\end{thebibliography}
 
 \end{document}
