@@ -1,0 +1,35 @@
+FILE:          image.cpp
+CODEQUALITY    
+
+COMMENTS:
+-Looks great
+
+                  
+
+
+--------------------------
+FILE:          main.cpp
+FUNCTIONALITY  
+
+COMMENTS:
+-Code takes too long when run without -O3 (had to add it to get any output in under 15 seconds).
+
+POINTS DEDUCTED: 1
+
+
+--------------------------
+
+GRADING TA                  
+SUNet ID: maxfit, GitHub ID trevormaxfield
+###################################################
+
+FUNCTIONALITY SCORE:                     ok
+###################################################
+
+WRITEUP SCORE:                            +
+###################################################
+
+CODEQUALITY SCORE:                        +
+###################################################
+You used 1 late days on this assignment.
+If you have any problem about grading result, please file an issue in your GitHub repo.
