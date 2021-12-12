@@ -36,3 +36,7 @@ laplacian). So, after the calculations, we need to translate
 these values back to unsigned characters. We first need to make
 sure that these values are positive and under 255, otherwise it
 might create issues.
+
+//--documentation_0
+//--Great writeup
+//--END

@@ -48,3 +48,8 @@ int main() {
 }
 
 
+//--functionality_1
+//--Code takes too long when run without -O3 (had to add it to get any output in under 15 seconds).
+//--END
+
+

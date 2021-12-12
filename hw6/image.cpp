@@ -122,3 +122,8 @@ unsigned int image::Sharpness(void){
   }
   return maximum;
 }
+
+
+//--codequality_0
+//--Looks great
+//--END
