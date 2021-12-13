@@ -1,0 +1,49 @@
+FILE:          main.cpp
+FUNCTIONALITY  
+
+COMMENTS:
+-very good! Generally the code is performing as expected. However, the biggest system is not running within a minute.
+-However it is totally accurate. Your plotting is also giving jagged results which is unexpected.
+
+POINTS DEDUCTED: 1
+
+
+--------------------------
+FILE:          main.cpp
+CODEQUALITY    
+
+COMMENTS:
+-code quality is good
+-I especially thought the AddUnknown helper function was a good design
+-it makes your code clear.
+
+                  
+
+
+--------------------------
+FILE:          main.cpp
+DOCUMENTATION  
+
+COMMENTS:
+-README is quite thorough.
+-However comments around functions are quite brief.
+
+POINTS DEDUCTED: 1
+
+
+--------------------------
+
+GRADING TA                  
+SUNet ID: samuellr, GitHub ID sam-randall
+###################################################
+
+FUNCTIONALITY SCORE:                     ok
+###################################################
+
+WRITEUP SCORE:                           ok
+###################################################
+
+CODEQUALITY SCORE:                        +
+###################################################
+You used 0 late days on this assignment.
+If you have any problem about grading result, please file an issue in your GitHub repo.
